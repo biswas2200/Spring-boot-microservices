@@ -4,7 +4,8 @@ import org.projectjobapp.jobapplication.dto.JobDTO;
 
 import java.util.List;
 
-public interface Service {
+
+public interface JobService {
     public List<JobDTO> getAllJobs();
     public JobDTO getJobById(Long jobId);
     public JobDTO createJob(JobDTO jobDTO);

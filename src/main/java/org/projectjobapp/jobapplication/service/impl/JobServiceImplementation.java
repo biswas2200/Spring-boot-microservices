@@ -3,20 +3,22 @@ package org.projectjobapp.jobapplication.service.impl;
 import org.projectjobapp.jobapplication.dto.JobDTO;
 import org.projectjobapp.jobapplication.entity.Job;
 import org.projectjobapp.jobapplication.repository.JobRepository;
-import org.projectjobapp.jobapplication.service.Service;
+import org.projectjobapp.jobapplication.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@org.springframework.stereotype.Service
-public class ServiceImplementation implements Service {
+@Service
+public class JobServiceImplementation implements JobService {
 
-    final JobRepository jobRepository;
+   private final JobRepository jobRepository;
 
     @Autowired
-    public ServiceImplementation(JobRepository jobRepository) {
+    public JobServiceImplementation(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
     }
 
