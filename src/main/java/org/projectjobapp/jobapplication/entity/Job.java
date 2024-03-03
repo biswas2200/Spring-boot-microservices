@@ -19,7 +19,6 @@ public class Job {
     @Column(name = "job_max_salary")
     private Integer jobMaxSalary;
     private String Location;
-
     public Job() {
     }
 
