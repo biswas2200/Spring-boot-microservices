@@ -1,7 +1,5 @@
 package org.projectjobapp.jobapplication.dto;
 
-import org.projectjobapp.jobapplication.entity.Job;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -9,12 +7,12 @@ public class CompanyDTO {
     private Long companyId;
     private String companyName;
     private String companyDescription;
-    private List<Job> jobs;
+    private List<JobDTO> jobs;
 
     public CompanyDTO() {
     }
 
-    public CompanyDTO(Long companyId, String companyName, String companyDescription, List<Job> jobs) {
+    public CompanyDTO(Long companyId, String companyName, String companyDescription, List<JobDTO> jobs) {
         this.companyId = companyId;
         this.companyName = companyName;
         this.companyDescription = companyDescription;
@@ -45,11 +43,11 @@ public class CompanyDTO {
         this.companyDescription = companyDescription;
     }
 
-    public List<Job> getJobs() {
+    public List<JobDTO> getJobs() {
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(List<JobDTO> jobs) {
         this.jobs = jobs;
     }
 

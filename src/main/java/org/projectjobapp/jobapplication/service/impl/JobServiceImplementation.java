@@ -22,7 +22,7 @@ public class JobServiceImplementation implements JobService {
         this.jobRepository = jobRepository;
     }
 
-    public JobDTO mapToDTOJob(Job job){
+    public static JobDTO mapToDTOJob(Job job){
         if (job == null)
             return null;
         JobDTO jobDTO = new JobDTO();
@@ -32,11 +32,11 @@ public class JobServiceImplementation implements JobService {
         jobDTO.setJobMaxSalary(job.getJobMaxSalary());
         jobDTO.setJobMinSalary(job.getJobMinSalary());
         jobDTO.setLocation(job.getLocation());
-
+        jobDTO.setCompany(job.getCompany());
         return jobDTO;
     }
 
-    public Job mapToEntityJob(JobDTO jobDTO){
+    public static Job mapToEntityJob(JobDTO jobDTO){
         if (jobDTO == null)
             return null;
         Job job = new Job();
@@ -46,6 +46,7 @@ public class JobServiceImplementation implements JobService {
         job.setJobMaxSalary(jobDTO.getJobMaxSalary());
         job.setJobMinSalary(jobDTO.getJobMinSalary());
         job.setLocation(jobDTO.getLocation());
+        job.setCompany(jobDTO.getCompany());
 
         return job;
     }
@@ -54,14 +55,14 @@ public class JobServiceImplementation implements JobService {
     public List<JobDTO> getAllJobs() {
         List<Job> jobs = jobRepository.findAll();
         return jobs.stream()
-                .map(this::mapToDTOJob)
+                .map(JobServiceImplementation::mapToDTOJob)
                 .collect(Collectors.toList());
     }
 
     @Override
     public JobDTO getJobById(Long jobId) {
         Optional<Job> optionalJob = jobRepository.findById(jobId);
-        return optionalJob.map(this::mapToDTOJob)
+        return optionalJob.map(JobServiceImplementation::mapToDTOJob)
                 .orElse(null);
     }
 
@@ -76,7 +77,7 @@ public class JobServiceImplementation implements JobService {
     public JobDTO updateJob(Long jobId, JobDTO jobDTO) {
         Job existingJob = jobRepository.findById(jobId).orElse(null);
         if (existingJob != null){
-            existingJob.setJobTitle(jobDTO.getJobTitle());
+            //existingJob.setJobTitle(jobDTO.getJobTitle());
             existingJob.setJobDescription(jobDTO.getJobDescription());
             existingJob.setJobMaxSalary(jobDTO.getJobMaxSalary());
             existingJob.setJobMinSalary(jobDTO.getJobMinSalary());

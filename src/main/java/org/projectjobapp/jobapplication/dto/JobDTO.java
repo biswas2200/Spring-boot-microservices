@@ -1,5 +1,7 @@
 package org.projectjobapp.jobapplication.dto;
 
+import org.projectjobapp.jobapplication.entity.Company;
+
 public class JobDTO {
     private Long jobId;
     private String jobTitle;
@@ -7,6 +9,7 @@ public class JobDTO {
     private Integer jobMinSalary;
     private Integer jobMaxSalary;
     private String Location;
+    private Company company;
 
     public JobDTO() {
 
@@ -19,6 +22,14 @@ public class JobDTO {
         this.jobMinSalary = jobMinSalary;
         this.jobMaxSalary = jobMaxSalary;
         Location = location;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Long getJobId() {
@@ -69,15 +80,5 @@ public class JobDTO {
         Location = location;
     }
 
-    @Override
-    public String toString() {
-        return "JobDTO{" +
-                "jobId=" + jobId +
-                ", jobTitle='" + jobTitle + '\'' +
-                ", jobDescription='" + jobDescription + '\'' +
-                ", jobMinSalary=" + jobMinSalary +
-                ", jobMaxSalary=" + jobMaxSalary +
-                ", Location='" + Location + '\'' +
-                '}';
-    }
+
 }

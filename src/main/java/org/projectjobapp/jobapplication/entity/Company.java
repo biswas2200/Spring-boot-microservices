@@ -1,5 +1,6 @@
 package org.projectjobapp.jobapplication.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,9 +13,11 @@ public class Company {
     private Long companyId;
     @Column(name = "company_name")
     private String companyName;
-    @Column(name = "company_Description")
+    @Column(name = "company_description")
     private String companyDescription;
-    @OneToMany
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Job> jobs;
 
     public Company() {
@@ -26,6 +29,8 @@ public class Company {
         this.companyDescription = companyDescription;
         this.jobs = jobs;
     }
+
+
 
     public Long getCompanyId() {
         return companyId;
