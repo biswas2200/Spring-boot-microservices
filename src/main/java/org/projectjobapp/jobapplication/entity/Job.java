@@ -2,8 +2,6 @@ package org.projectjobapp.jobapplication.entity;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 @Entity
 public class Job {
     @Id
@@ -99,20 +97,8 @@ public class Job {
         Location = location;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Job job = (Job) o;
-        return Objects.equals(jobId, job.jobId) && Objects.equals(jobTitle, job.jobTitle) && Objects.equals(jobDescription, job.jobDescription) && Objects.equals(jobMinSalary, job.jobMinSalary) && Objects.equals(jobMaxSalary, job.jobMaxSalary) && Objects.equals(Location, job.Location) && Objects.equals(company, job.company);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(jobId, jobTitle, jobDescription, jobMinSalary, jobMaxSalary, Location, company);
-    }
-
-    @Override
+   /* @Override
     public String toString() {
         return "Job{" +
                 "jobId=" + jobId +
@@ -123,5 +109,19 @@ public class Job {
                 ", Location='" + Location + '\'' +
                 ", company=" + company +
                 '}';
+    }*/
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "jobId=" + jobId +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", jobDescription='" + jobDescription + '\'' +
+                ", jobMinSalary=" + jobMinSalary +
+                ", jobMaxSalary=" + jobMaxSalary +
+                ", Location='" + Location + '\'' +
+                ", company=" + (company != null ? company.getCompanyName() : "null") +
+                '}';
     }
+
 }

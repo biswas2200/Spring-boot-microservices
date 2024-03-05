@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class Company {
@@ -17,7 +16,7 @@ public class Company {
     private String companyDescription;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "company" , cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Job> jobs;
 
     public Company() {
@@ -29,7 +28,6 @@ public class Company {
         this.companyDescription = companyDescription;
         this.jobs = jobs;
     }
-
 
 
     public Long getCompanyId() {
@@ -64,20 +62,7 @@ public class Company {
         this.jobs = jobs;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Company company = (Company) o;
-        return Objects.equals(companyId, company.companyId) && Objects.equals(companyName, company.companyName) && Objects.equals(companyDescription, company.companyDescription) && Objects.equals(jobs, company.jobs);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(companyId, companyName, companyDescription, jobs);
-    }
-
-    @Override
+    /*@Override
     public String toString() {
         return "Company{" +
                 "companyId=" + companyId +
@@ -85,5 +70,31 @@ public class Company {
                 ", companyDescription='" + companyDescription + '\'' +
                 ", jobs=" + jobs +
                 '}';
+    }*/
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Company{");
+        sb.append("companyId=").append(companyId);
+        sb.append(", companyName='").append(companyName).append('\'');
+        sb.append(", companyDescription='").append(companyDescription).append('\'');
+        sb.append(", jobs=[");
+        if (jobs != null) {
+            for (Job job : jobs) {
+                sb.append("{")
+                        .append("jobId=").append(job.getJobId())
+                        .append(", jobTitle='").append(job.getJobTitle()).append('\'')
+                        .append(", jobDescription='").append(job.getJobDescription()).append('\'')
+                        .append(", jobMinSalary=").append(job.getJobMinSalary())
+                        .append(", jobMaxSalary=").append(job.getJobMaxSalary())
+                        .append(", location='").append(job.getLocation()).append('\'')
+                        .append("}");
+            }
+        }
+        sb.append("]");
+        sb.append('}');
+        return sb.toString();
     }
+
 }

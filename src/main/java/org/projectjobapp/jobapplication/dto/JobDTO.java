@@ -80,5 +80,30 @@ public class JobDTO {
         Location = location;
     }
 
+   /* @Override
+    public String toString() {
+        return "JobDTO{" +
+                "jobId=" + jobId +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", jobDescription='" + jobDescription + '\'' +
+                ", jobMinSalary=" + jobMinSalary +
+                ", jobMaxSalary=" + jobMaxSalary +
+                ", Location='" + Location + '\'' +
+                ", company=" + company +
+                '}';
+    }*/
+
+    @Override
+    public String toString() {
+        return "JobDTO{" +
+                "jobId=" + jobId +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", jobDescription='" + jobDescription + '\'' +
+                ", jobMinSalary=" + jobMinSalary +
+                ", jobMaxSalary=" + jobMaxSalary +
+                ", Location='" + Location + '\'' +
+                ", company=" + (company != null ? company.getCompanyName() : "null") +
+                '}';
+    }
 
 }

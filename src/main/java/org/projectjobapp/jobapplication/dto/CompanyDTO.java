@@ -1,7 +1,6 @@
 package org.projectjobapp.jobapplication.dto;
 
 import java.util.List;
-import java.util.Objects;
 
 public class CompanyDTO {
     private Long companyId;
@@ -51,20 +50,8 @@ public class CompanyDTO {
         this.jobs = jobs;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CompanyDTO that = (CompanyDTO) o;
-        return Objects.equals(companyId, that.companyId) && Objects.equals(companyName, that.companyName) && Objects.equals(companyDescription, that.companyDescription) && Objects.equals(jobs, that.jobs);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(companyId, companyName, companyDescription, jobs);
-    }
-
-    @Override
+   /* @Override
     public String toString() {
         return "CompanyDTO{" +
                 "companyId=" + companyId +
@@ -72,5 +59,31 @@ public class CompanyDTO {
                 ", companyDescription='" + companyDescription + '\'' +
                 ", jobs=" + jobs +
                 '}';
+    }*/
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("CompanyDTO{");
+        sb.append("companyId=").append(companyId);
+        sb.append(", companyName='").append(companyName).append('\'');
+        sb.append(", companyDescription='").append(companyDescription).append('\'');
+        sb.append(", jobs=[");
+        if (jobs != null) {
+            for (JobDTO job : jobs) {
+                sb.append("{")
+                        .append("jobId=").append(job.getJobId())
+                        .append(", jobTitle='").append(job.getJobTitle()).append('\'')
+                        .append(", jobDescription='").append(job.getJobDescription()).append('\'')
+                        .append(", jobMinSalary=").append(job.getJobMinSalary())
+                        .append(", jobMaxSalary=").append(job.getJobMaxSalary())
+                        .append(", location='").append(job.getLocation()).append('\'')
+                        .append("}");
+            }
+        }
+        sb.append("]");
+        sb.append('}');
+        return sb.toString();
     }
+
 }

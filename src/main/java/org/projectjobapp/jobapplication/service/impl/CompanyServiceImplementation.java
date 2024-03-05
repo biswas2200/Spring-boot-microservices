@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class CompanyServiceImplementation implements CompanyService {
 
 
-    private CompanyRepository companyRepository;
+    private final CompanyRepository companyRepository;
 
     @Autowired
     public CompanyServiceImplementation(CompanyRepository companyRepository) {
@@ -83,22 +83,30 @@ public class CompanyServiceImplementation implements CompanyService {
         return mapToDTO(saveCompany);
     }
 
+
+    //Issue with Update method the update method is return and storing null values.
     @Override
     public CompanyDTO updateCompany(Long companyId, CompanyDTO companyDTO) {
+        if (companyId == null || companyDTO == null) {
+            return null;
+        }
         Company existingSaveCompany = companyRepository.findById(companyId)
                 .orElse(null);
-        if (existingSaveCompany != null) {
-            existingSaveCompany.setCompanyName(companyDTO.getCompanyName());
-            existingSaveCompany.setCompanyDescription(companyDTO.getCompanyDescription());
-            if (companyDTO.getJobs() != null && !companyDTO.getJobs().isEmpty()) {
-                List<Job> jobs = companyDTO.getJobs()
-                        .stream().map(JobServiceImplementation::mapToEntityJob)
-                        .collect(Collectors.toList());
 
-                existingSaveCompany.setJobs(jobs);
-            }
-            existingSaveCompany = companyRepository.save(existingSaveCompany);
+        if (existingSaveCompany == null) {
+            return null;
         }
+        existingSaveCompany.setCompanyName(companyDTO.getCompanyName());
+        existingSaveCompany.setCompanyDescription(companyDTO.getCompanyDescription());
+        if (companyDTO.getJobs() != null && !companyDTO.getJobs().isEmpty()) {
+            List<Job> jobs = companyDTO.getJobs().stream()
+                    .map(JobServiceImplementation::mapToEntityJob)
+                    .collect(Collectors.toList());
+            existingSaveCompany.setJobs(jobs);
+        } else {
+            existingSaveCompany.getJobs().clear();
+        }
+        existingSaveCompany = companyRepository.save(existingSaveCompany);
         return mapToDTO(existingSaveCompany);
     }
 
