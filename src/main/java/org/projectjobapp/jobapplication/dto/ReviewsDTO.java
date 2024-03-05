@@ -1,25 +1,19 @@
-package org.projectjobapp.jobapplication.entity;
+package org.projectjobapp.jobapplication.dto;
 
+import org.projectjobapp.jobapplication.entity.Company;
 
-import jakarta.persistence.*;
-
-@Entity
-public class Reviews {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ReviewsDTO {
     private Long reviewId;
     private String name;
     private String description;
     private Double rating;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
     private Company company;
 
-    public Reviews() {
+    public ReviewsDTO() {
     }
 
-    public Reviews(Long reviewId, String name, String description, Double rating, Company company) {
+    public ReviewsDTO(Long reviewId, String name, String description, Double rating, Company company) {
         this.reviewId = reviewId;
         this.name = name;
         this.description = description;
@@ -66,4 +60,5 @@ public class Reviews {
     public void setCompany(Company company) {
         this.company = company;
     }
+
 }

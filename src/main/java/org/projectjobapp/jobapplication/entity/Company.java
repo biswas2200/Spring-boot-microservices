@@ -19,6 +19,9 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Job> jobs;
 
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<Reviews> reviews;
+
     public Company() {
     }
 

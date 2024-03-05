@@ -7,6 +7,7 @@ public class CompanyDTO {
     private String companyName;
     private String companyDescription;
     private List<JobDTO> jobs;
+    private List<ReviewsDTO> reviews;
 
     public CompanyDTO() {
     }
@@ -16,6 +17,14 @@ public class CompanyDTO {
         this.companyName = companyName;
         this.companyDescription = companyDescription;
         this.jobs = jobs;
+    }
+
+    public CompanyDTO(Long companyId, String companyName, String companyDescription, List<JobDTO> jobs, List<ReviewsDTO> reviews) {
+        this.companyId = companyId;
+        this.companyName = companyName;
+        this.companyDescription = companyDescription;
+        this.jobs = jobs;
+        this.reviews = reviews;
     }
 
     public Long getCompanyId() {
