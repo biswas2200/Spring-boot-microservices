@@ -9,5 +9,9 @@ public interface ReviewsService {
 
     ReviewsDTO getReviewsById(Long reviewsId);
 
+    ReviewsDTO createReviews(ReviewsDTO reviewsDTO);
 
+    ReviewsDTO updateReviews(Long reviewId, ReviewsDTO reviewsDTO);
+
+    void deleteReviews(Long reviewsId);
 }

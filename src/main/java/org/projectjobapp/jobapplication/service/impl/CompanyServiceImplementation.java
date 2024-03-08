@@ -2,8 +2,10 @@ package org.projectjobapp.jobapplication.service.impl;
 
 import org.projectjobapp.jobapplication.dto.CompanyDTO;
 import org.projectjobapp.jobapplication.dto.JobDTO;
+import org.projectjobapp.jobapplication.dto.ReviewsDTO;
 import org.projectjobapp.jobapplication.entity.Company;
 import org.projectjobapp.jobapplication.entity.Job;
+import org.projectjobapp.jobapplication.entity.Reviews;
 import org.projectjobapp.jobapplication.repository.CompanyRepository;
 import org.projectjobapp.jobapplication.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,13 @@ public class CompanyServiceImplementation implements CompanyService {
         }
         companyDTO.setJobs(jobDTOS);
 
+        List<ReviewsDTO> reviewsDTOS = new ArrayList<>();
+        if (company.getReviews() != null) {
+            reviewsDTOS = company.getReviews().stream()
+                    .map(ReviewServiceImplementation::mapToDTOReview)
+                    .collect(Collectors.toList());
+        }
+        companyDTO.setReviews(reviewsDTOS);
         return companyDTO;
     }
 
@@ -58,6 +67,14 @@ public class CompanyServiceImplementation implements CompanyService {
                     .collect(Collectors.toList());
         }
         company.setJobs(jobs);
+
+        List<Reviews> reviews = new ArrayList<>();
+        if (companyDTO.getReviews() != null) {
+            reviews = companyDTO.getReviews().stream()
+                    .map(ReviewServiceImplementation::mapToEntityReview)
+                    .collect(Collectors.toList());
+        }
+        company.setReviews(reviews);
         return company;
     }
 

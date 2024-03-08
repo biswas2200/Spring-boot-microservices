@@ -27,6 +27,15 @@ public class CompanyDTO {
         this.reviews = reviews;
     }
 
+    public List<ReviewsDTO> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewsDTO> reviews) {
+        this.reviews = reviews;
+    }
+
+
     public Long getCompanyId() {
         return companyId;
     }
@@ -70,7 +79,7 @@ public class CompanyDTO {
                 '}';
     }*/
 
-    @Override
+    /*@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("CompanyDTO{");
@@ -93,6 +102,45 @@ public class CompanyDTO {
         sb.append("]");
         sb.append('}');
         return sb.toString();
+    }*/
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("CompanyDTO{");
+        sb.append("companyId=").append(companyId);
+        sb.append(", companyName='").append(companyName).append('\'');
+        sb.append(", companyDescription='").append(companyDescription).append('\'');
+        sb.append(", jobs=[");
+        if (jobs != null) {
+            for (JobDTO job : jobs) {
+                sb.append("{")
+                        .append("jobId=").append(job.getJobId())
+                        .append(", jobTitle='").append(job.getJobTitle()).append('\'')
+                        .append(", jobDescription='").append(job.getJobDescription()).append('\'')
+                        .append(", jobMinSalary=").append(job.getJobMinSalary())
+                        .append(", jobMaxSalary=").append(job.getJobMaxSalary())
+                        .append(", location='").append(job.getLocation()).append('\'')
+                        .append("}");
+            }
+        }
+        sb.append("]");
+        sb.append(", reviews=[");
+        if (reviews != null) {
+            for (ReviewsDTO review : reviews) {
+                sb.append("{")
+                        .append("reviewId=").append(review.getReviewId())
+                        .append(", name='").append(review.getName()).append('\'')
+                        .append(", description='").append(review.getDescription()).append('\'')
+                        .append(", rating=").append(review.getRating())
+                        .append("}");
+            }
+        } else {
+            sb.append("null");
+        }
+        sb.append('}');
+        return sb.toString();
     }
+
 
 }

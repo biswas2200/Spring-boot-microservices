@@ -61,4 +61,14 @@ public class ReviewsDTO {
         this.company = company;
     }
 
+    @Override
+    public String toString() {
+        return "ReviewsDTO{" +
+                "reviewId=" + reviewId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", rating=" + rating +
+                ", company=" + (company != null ? company.getCompanyName() : "null") +
+                '}';
+    }
 }
